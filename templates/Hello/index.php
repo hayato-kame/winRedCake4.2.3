@@ -1,8 +1,16 @@
 <h1>サンプル見出し</h1>
-<p>フォーム送信</p>
 
-<form method="get" action="/hello/sendForm">
-    <input type="text" name="text1" />
-    <input type="submit" />
+<pre>
+<?php var_dump($result); ?>
+</pre>
 
-</form>
+<?php 
+echo $this->Form->create(null,
+['type' => 'post', 'url' => ['action' => 'index']]);
+
+echo $this->Form->dateTime('HelloForm.date');
+echo $this->Form->submit("送信");
+echo $this->Form->end();
+?>
+
+</pre>
