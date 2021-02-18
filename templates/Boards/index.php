@@ -1,4 +1,21 @@
 <h1>Databaseサンプル</h1>
+
+<?=$this->Form->create($entity, ['url' => ['action' => 'delRecord']]) ?>
+
+<fieldset>
+<?=$this->Form->text("id") ?>
+</fieldset>
+
+<?=$this->Form->button("送信") ?>
+<?=$this->Form->end() ?>
+
+<p>COUNT:
+<?= $count ?>
+</p>
+
+
+<hr>
+
 <table>
 
 	<tr>
@@ -10,11 +27,10 @@
 
 <?php
 
-$arr = $data->toArray();
 
-for($i = 0; $i < count($arr); $i++) {
+for($i = 0; $i < count($data); $i++) {
     echo $this->Html->tableCells(
-        $arr[$i]->toArray(),
+        $data[$i]->toArray(),
         ['style' => 'background-color: #f0f0f0'],
         ['style' => 'font-weight:bold'], true
     );
