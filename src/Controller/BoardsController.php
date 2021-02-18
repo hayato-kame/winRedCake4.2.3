@@ -1,15 +1,18 @@
 <?php
+
 namespace App\Controller;
 
 use \Exception;
 use Cake\Log\Log;
 
-class BoardsController extends AppController {
+class BoardsController extends AppController
+{
 
-	
-    public function index(){
+
+    public function index()
+    {
         $this->set('entity', $this->Boards->newEmptyEntity());
-        if ($this->request->is('post')){
+        if ($this->request->is('post')) {
             $id = $this->request->getData('id');
             $data = $this->Boards->findByIdOrName($id, $id);
         } else {
@@ -20,8 +23,9 @@ class BoardsController extends AppController {
     }
 
 
-    public function addRecord(){
-        if ($this->request->is('post')){
+    public function addRecord()
+    {
+        if ($this->request->is('post')) {
             $board = $this->Boards->newEntity($this->request->getData());
             $this->Boards->save($board);
         }
@@ -31,14 +35,13 @@ class BoardsController extends AppController {
         echo "</pre>";
     }
 
-    public function delRecord(){
-        if ($this->request->is('post')){
-            try {
-                $entity = $this->Boards->get($this->request->getData('id'));
-                $this->Boards->delete($entity);
-            } catch(Exception $e){
-                Log::write('debug',$e->getMessage());
-            }
+    public function delRecord()
+    {
+
+        if ($this->request->is('post')) {
+            $this->Boards->deleteAll(
+                ['name like' => "%" . $this->request->getData('name') . "%"]
+            );
         }
         $this->redirect(['action' => 'index']);
     }

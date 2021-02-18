@@ -3,7 +3,7 @@
 <?=$this->Form->create($entity, ['url' => ['action' => 'delRecord']]) ?>
 
 <fieldset>
-<?=$this->Form->text("id") ?>
+<?=$this->Form->text("name") ?>
 </fieldset>
 
 <?=$this->Form->button("送信") ?>
