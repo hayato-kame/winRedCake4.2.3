@@ -1,9 +1,13 @@
 <h1>Databaseサンプル</h1>
 
-<?=$this->Form->create($entity, ['url' => ['action' => 'delRecord']]) ?>
+<?=$this->Form->create($entity, ['url' => ['action' => 'editRecord']]) ?>
 
 <fieldset>
+
+
 <?=$this->Form->text("name") ?>
+<?=$this->Form->text("title") ?>
+
 </fieldset>
 
 <?=$this->Form->button("送信") ?>

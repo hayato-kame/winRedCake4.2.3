@@ -9,15 +9,17 @@ class BoardsController extends AppController
 {
 
 
-    public function index()
-    {
+    public function index($id = null){
         $this->set('entity', $this->Boards->newEmptyEntity());
-        if ($this->request->is('post')) {
-            $id = $this->request->getData('id');
-            $data = $this->Boards->findByIdOrName($id, $id);
-        } else {
-            $data = $this->Boards->find('all');
+        if($id != null) {
+            try {
+                $entity = $this->Boards->get($id);
+                $this->set('entity', $entity);
+            } catch(Exception $e){
+                Log::write('debug', $e->getMessage());
+            }
         }
+        $data = $this->Boards->find('all')->order(['id' => 'DESC']);
         $this->set('data', $data->toArray());
         $this->set('count', $data->count());
     }
@@ -34,6 +36,16 @@ class BoardsController extends AppController
         print_r($this->request->getData());
         echo "</pre>";
     }
+
+    public function editRecord() {
+        if ($this->request->is('post')){
+            $arr1 = ['name' => $this->request->getData('name')];
+            $arr2 = ['title' => $this->request->getData('title')];
+            $this->Boards->updateAll($arr2, $arr1);
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+
 
     public function delRecord()
     {
