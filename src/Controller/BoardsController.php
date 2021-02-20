@@ -9,22 +9,10 @@ use Cake\Log\Log;
 class BoardsController extends AppController
 {
 
-
     public function index($id = null){
-        $this->set('entity', $this->Boards->newEmptyEntity());
-        if($id != null) {
-            try {
-                $entity = $this->Boards->get($id);
-                $this->set('entity', $entity);
-            } catch(Exception $e){
-                Log::write('debug', $e->getMessage());
-            }
-        }
-        $data = $this->Boards->find('all')->order(['id' => 'DESC']);
-        $this->set('data', $data->toArray());
-        $this->set('count', $data->count());
+        $data = $this->Boards->find('all')->toArray();
+        $this->set('data',$data);
     }
-
 
     public function addRecord()
     {
